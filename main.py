@@ -12,10 +12,9 @@ async def Listener():
     listener.run()
 
 async def main():
-    random_task = Random()
-    listen_task = Listener()
-    await asyncio.gather(random_task, listen_task)
-
+    random_task = asyncio.create_task(Random())
+    asyncio.create_task(Listener())
+    await asyncio.gather(random_task)
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
